@@ -7,12 +7,19 @@ config_dest="$HOME/.config"
 dotfiles_repo="$HOME/duranj.Dots"
 
 copyDotFilesRepo() {
-	# copy and paste folders
-	cp -r "$dotfiles_repo/duranjZellij/zellij/" "$config_dest"
-	cp -r "$dotfiles_repo/duranjFish/fish/" "$config_dest"
-	cp -r "$dotfiles_repo/duranjNvim/nvim/" "$config_dest"
+	# pull dot
+	cd "$dotfiles_repo" || exit
 
-	echo "Dotfiles configurations synchronized successfully."
+	if git pull origin master; then
+		# copy and paste folders
+		cp -r "$dotfiles_repo/duranjZellij/zellij/" "$config_dest"
+		cp -r "$dotfiles_repo/duranjFish/fish/" "$config_dest"
+		cp -r "$dotfiles_repo/duranjNvim/nvim/" "$config_dest"
+
+		echo "Dotfiles configurations synchronized successfully."
+	else
+		echo "Error: Failed to pull changes from the repository"
+	fi
 }
 
 copyConfigToRepo() {
