@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #directories configs
-config_dest="$HOME/.config"
+config_path="$HOME/.config"
 
 # define directory dotfiles
 dotfiles_repo="$HOME/duranj.Dots"
@@ -9,12 +9,11 @@ dotfiles_repo="$HOME/duranj.Dots"
 copyDotFilesRepo() {
 	# pull dot
 	cd "$dotfiles_repo" || exit
-
 	if git pull origin master; then
 		# copy and paste folders
-		cp -r "$dotfiles_repo/duranjZellij/zellij/" "$config_dest"
-		cp -r "$dotfiles_repo/duranjFish/fish/" "$config_dest"
-		cp -r "$dotfiles_repo/duranjNvim/nvim/" "$config_dest"
+		cp -r "$dotfiles_repo/duranjZellij/zellij/" "$config_path"
+		cp -r "$dotfiles_repo/duranjFish/fish/" "$config_path"
+		cp -r "$dotfiles_repo/duranjNvim/nvim/" "$config_path"
 
 		echo "Dotfiles configurations synchronized successfully."
 	else
@@ -24,9 +23,9 @@ copyDotFilesRepo() {
 
 copyConfigToRepo() {
 	# copy and paste folders
-	cp -r "$config_dest/zellij/" "$dotfiles_repo/duranjZellij"
-	cp -r "$config_dest/fish/" "$dotfiles_repo/duranjFish"
-	rsync -a --exclude='.git' --exclude='.gitignore' "$config_dest/nvim/" "$dotfiles_repo/duranjNvim/nvim"
+	cp -r "$config_path/zellij/" "$dotfiles_repo/duranjZellij"
+	cp -r "$config_path/fish/" "$dotfiles_repo/duranjFish"
+	rsync -a --exclude='.git' --exclude='.gitignore' "$config_path/nvim/" "$dotfiles_repo/duranjNvim/nvim"
 
 	echo "Dotfiles configurations synchoronized successfully."
 }
