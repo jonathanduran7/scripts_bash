@@ -23,8 +23,12 @@ copyDotFilesRepo() {
 
 copyConfigToRepo() {
 	# copy and paste folders
+	# if you want to add more config folder, just replace this pattern
+	# cp -r "$config_path/<folderNameConfig>/" "$dotfiles_repo/<folderDestination>"
 	cp -r "$config_path/zellij/" "$dotfiles_repo/duranjZellij"
 	cp -r "$config_path/fish/" "$dotfiles_repo/duranjFish"
+
+	# if you want ignore some files, just add the pattern --exclude='<file>'
 	rsync -a --exclude='.git' --exclude='.gitignore' "$config_path/nvim/" "$dotfiles_repo/duranjNvim/nvim"
 
 	echo "Dotfiles configurations synchoronized successfully."
